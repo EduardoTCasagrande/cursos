@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Arquivo</title>
+    <link rel="stylesheet" href="/css/comum/commum.css">
+    <style>
+
+        .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 80px;
+            
+        }
+        .container div{
+            background-color: #fff;
+            border: 2px solid #f64fad;
+            border-radius: 10px;
+            padding: 30px 60px 30px 60px;
+            margin: 10px;
+        }
+
+        .container img{
+            width: 130px;
+            border-radius: 100px;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/image/logo.png" alt="">
+    </header>
+    <div class="container">
+        <div>
+            <img src="<%= user.profile_picture || '/uploads/avatar.png' %>" alt="Foto de Perfil"> 
+            <h1>Trocar foto de Perfil</h1>
+            <form action="/upload" method="POST" enctype="multipart/form-data">
+                <label for="file">Selecione um arquivo:</label>
+                <input type="file" name="file" id="file" required>
+                <br><br>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        &copy; 2025 Princesa Reborn - Todos os direitos reservados 
+    </footer>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de <%= userData.username %></title>
+    <link rel="stylesheet" href="/css/comum/commum.css">
+    <link rel="stylesheet" href="/css/form/form.css">
+    <style>
+        .texto{
+            display: flex;
+            justify-content: center;
+        }
+        .container{
+            margin-bottom: 70px;
+            background-color: rgb(244, 248, 248);
+            max-width: 400px;
+            height: 300px;
+            border-radius: 5px ;
+            border: 4px solid #ff66b2;
+
+        }
+        .column{
+            margin-right: 10px;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img class="logo" src="/image/logo.png" alt="">
+        </div>
+    </header>
+    
+    <h1 class="texto">Perfil do Usuário</h1>
+    <main>
+        <div class="container">
+            <div class="column">
+                <p><strong>ID:</strong> <%= userData.id %></p>
+                <p><strong>Nome:</strong> <%= userData.username %></p>
+                <p><strong>Função:</strong> <%= userData.role %></p>
+                <a href="/dashboard">Voltar ao dashboard</a>
+            </div>        
+            <% if (userData.profile_picture) { %>
+                <img src="<%= userData.profile_picture %>" alt="Foto de perfil" width="150">
+            <% } else { %>
+                <p>Sem foto de perfil.</p>
+            <% } %>
+
+        </div>
+
+    </main>
+    <div class="column">
+    <h3>Resultados dos Quizzes:</h3>
+    <% if (quizResults.length > 0) { %>
+        <ul>
+            <% quizResults.forEach(result => { %>
+                <li>
+                    <strong><%= result.module %></strong>:
+                    <%= result.correct_answers %> de <%= result.total_questions %> corretas
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>Nenhum quiz respondido ainda.</p>
+    <% } %>
+</div>
+
+    <footer>
+        © 2025 Princesa Reborn. Todos os direitos reservados.
+    </footer>
+</body>
+</html>

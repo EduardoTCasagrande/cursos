@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+    <html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Plataforma</title>
+        <link rel="stylesheet" href="/css/curso/style.css">
+        <link rel="stylesheet" href="/css/comum/commum.css">
+        <link rel="shortcut icon" href="/image/logo.ico" type="image/x-icon">
+    </head>
+    <body>
+        <header>
+            <a href="/dashboard"><img src="/image/logo.png" alt="Princesa Reborn"></a>
+        </header>
+            <div class="titulo">
+                <h1>Conhecendo a plataforma</h1>
+            </div>
+            <div class="video-container">
+                <div class="main-video" id="main-video">
+                    <h2 id="mainTitle"><%= videos[0].title %></h2>
+
+                    <video id="video-1" controls>
+                        <source src="<%= videos[0].path %>" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+                <div class="mobal">
+                    <div class="video-list">
+                        <% videos.forEach((video, index) => { %>
+                            <div class="video-item" onclick="changeMainVideo('<%= video.path %>', '<%= video.title %>','<%= video.desc %>', <%= index %>); scrollToMainVideo()">
+                                <video class="thumbnail" id="video-<%= index + 2 %>" muted>
+                                    <source src="<%= video.path %>" type="video/mp4">
+                                </video>
+                                <p><%= video.title %></p>
+
+                            </div>
+                        <% }); %>
+                    </div>
+                    <div class="desc">
+                        <p>
+                            <span class="short-text"><%= videos[0].desc ? videos[0].desc.substring(0, 100) : '' %></span>
+                            <span class="full-text" style="display: none;"><%= videos[0].desc %></span>
+                            <% if (videos[0].desc && videos[0].desc.length > 100) { %>
+                                <button class="read-more-btn" onclick="toggleReadMore(this)"> Ler mais </button>
+                            <% } %>
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="parabens">
+                <div>
+                    <h2>Você concluiu esse modulo, continue assim 😉</h2>
+                    <a href="/modulo1">Próximo Modulo<img src="/image/seta.png" alt=""></a>
+                </div>
+            </div>
+        <footer>
+            © 2025 Princesa Reborn. Todos os direitos reservados.
+        </footer>
+
+        <script src="/js/carregarProgresso.js"></script>
+        <script src="/js/rolagemMainVideo.js"></script>
+        <script src="/js/lermais.js"></script>
+    </body>
+    </html>

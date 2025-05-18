@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/image/logo.ico" type="image/x-icon">
+    <title>Dashboard - Princesa Reborn</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff66b2; 
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        footer {
+            background-color: #000000; 
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        h1, h2 {
+            color: #ff66b2; 
+        }
+
+        .container{
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .container{
+            margin-bottom: 50px;
+        }
+
+        .dashboard-info {
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .dashboard-info img{
+            border-radius: 25px;
+            height: 100px;
+            width: 100px;
+        }
+        .dashboard-info p {
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+        }
+        @media(max-width: 468px){
+            table {
+                display: none;
+            }
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ff66b2;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f4f4f4;
+        }
+
+        button {
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff3399; 
+        }
+
+        a {
+            color: #ff66b2;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            
+            width: 150px;
+        }
+
+        a:hover {
+            color: #ff3399;
+        }
+
+        
+        .box {
+            background-color: #ffffff;
+            border-radius: 15px; 
+            padding: 40px;
+            margin: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .box:hover {
+            background-color: #f9f9f9; 
+            transform: translateY(-10px); 
+        }
+
+        .box h3 {
+            margin: 0;
+            color: #ff66b2;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .box a {
+            color: #ff66b2;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .box a:hover {
+            color: #ff3399;
+        }
+        .boxs{
+            display: flex;
+            justify-content: space-around;
+            overflow-x: scroll;
+            align-items: center;
+
+        }
+        ::-webkit-scrollbar-track {
+            background-color: #dbdbdb;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: #600b0b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff66b2
+        }
+        .progress{
+            display: flex;
+        }
+        .progress p{
+            color: #ff3399;
+            align-items: center;
+            text-align: center;
+            font-size: 21px;
+            margin-left: 10px;
+        }
+        header a{
+            color: #f4f4f4;
+        }
+        td img{
+            width: 30px;
+            border-radius: 30px;
+            height: 30px;
+        }
+        .dashboard-info div{
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+        }
+        img{
+            width: 10%;
+        }
+        header div{
+            display: flex;
+            align-items: center;
+        }
+        .logo{
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <img class="logo" src="/image/logo.png" alt="">
+        Princesa Reborn - Dashboard
+    </div>
+    
+    <a href="/upload">Perfil</a>
+    <a href="/artigos">Artigos</a>
+    <% if (user.role === 'admin') { %>
+        <a href="/register">Cadastrar Pessoas</a>
+    <% } %>
+</header>
+
+<div class="container">
+    <div class="dashboard-info">
+        <div>
+            <h1>Bem-vindo, <%= user.username %>!</h1>
+            <% if (user.progress === 0) { %>
+                <p color="blue">Novato</p>     
+            <% } %> 
+        </div>
+       
+        <img src="<%= user.profile_picture || '/uploads/avatar.png' %>" alt="Foto de Perfil"> 
+    </div>
+
+    <div class="boxs">
+        <div class="box">
+            <a href="/plataforma">
+                <h3>Bem vindo a Princesa Reborn</h3>
+                <a href="/plataforma">Conhecendo a plataforma</a>
+            </a>
+        </div>
+    
+        <div class="box">
+            <a href="/modulo1">
+                <h3>Recebimento e Conferência de Mercadorias</h3>
+                <a href="/modulo1">Modulo 1</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Montagem de Bonecas</h3>
+                <a href="/dashboard">Modulo 2</a>
+            </a>
+        </div>
+    
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Preparação de Embalagens de Envio</h3>
+                <a href="/dashboard">Modulo 3</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Finalização e Embalagem de Bonecas</h3>
+                <a href="/dashboard">Modulo 4</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Processo de Envio (Full)</h3>
+                <a href="/dashboard">Modulo 5</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3> Armazenamento e Organização</h3>
+                <a href="/dashboard">Modulo 6</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Identificação e Etiquetagem:</h3>
+                <a href="/dashboard">Modulo 7</a>
+            </a>
+        </div>
+        <div class="box">
+            <a href="/dashboard">
+                <h3>Montagem de Kits</h3>
+                <a href="/dashboard">Modulo 8</a>
+            </a>
+        </div>
+    </div>
+
+
+    <% if (user.role === 'admin' && users && users.length > 0) { %>
+        <h2>Usuários Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>FOTO</th>
+                    <th>Usuário</th>
+                    <th>Função</th>
+                    <th>Progresso</th>
+                    <th>Acertos</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><a href="/usuario/<%= user.id %>"><img src="<%= user.profile_picture || '/uploads/avatar.png' %>" alt="foto"></a></td>
+                        <td><%= user.username %></td>
+                        <td><%= user.role %></td>
+                        <td><%= user.progress %>%</td>
+                        <td>0</td>
+                        <td>
+                            <form action="/delete-user" method="POST" style="display: inline;">
+                                <input type="hidden" name="userId" value="<%= user.id %>">
+                                <button type="submit">Remover</button>
+                            </form>
+                        </td>
+                         
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } %> 
+    <div class="progress">
+        <% if (user.role === 'user'){ %>
+            <h2>Seu progresso: <%= user.progress %>%</h2>
+        <% } %> 
+    </div>
+
+
+    <a href="/login">Sair</a>
+</div>
+
+<footer>
+    © 2025 Princesa Reborn. Todos os direitos reservados.
+</footer>
+
+</body>
+</html>
